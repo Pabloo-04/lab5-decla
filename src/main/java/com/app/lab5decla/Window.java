@@ -30,7 +30,8 @@ public class Window extends JFrame {
         contenido.setOpaque(false);
         agregar(contenido, etiqueta("Función f(x)"), 6);
         agregar(contenido, txtEntrada, 8);
-        agregar(contenido, crearEjemplos(), 18);
+        agregar(contenido, crearEjemplos(), 12);
+        agregar(contenido, crearOperadores(), 18);
         agregar(contenido, crearBotones(motor), 22);
         agregar(contenido, panelResultado, 10);
         agregar(contenido, crearPie(), 0);
@@ -83,6 +84,27 @@ public class Window extends JFrame {
                     11);
             chip.addActionListener(e -> {
                 txtEntrada.setText(ej);
+                txtEntrada.requestFocusInWindow();
+            });
+            p.add(chip);
+        }
+        return p;
+    }
+
+    private JPanel crearOperadores() {
+        JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
+        p.setOpaque(false);
+
+        JLabel lbl = new JLabel("Operadores:");
+        lbl.setForeground(Theme.MUTED);
+        lbl.setFont(Theme.sans(Font.PLAIN, 12));
+        p.add(lbl);
+
+        for (String op : new String[]{"+", "-"}) {
+            Buttons chip = new Buttons(op, Theme.CARD, Theme.TEXT, 14, 6,
+                    13);
+            chip.addActionListener(e -> {
+                txtEntrada.replaceSelection(" " + op + " ");
                 txtEntrada.requestFocusInWindow();
             });
             p.add(chip);
